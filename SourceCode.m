@@ -3,16 +3,12 @@ data=csvread("datafile.csv");
 C=1;
 X=data(:,2:10);
 Wt=zeros(1,9);
-PMatrix=zeros(466,1);
 Yt=data(:,11);
-
-lTrainCorrectMatrix=zeros(1:3);
-
 lTestCorrect=0;
-lTestCorrectMatrix=zeros(1:3);
-
+lTrainCorrect=0;
 iterations=[1 2 10];
 
+%replacing values
 for i=1:699
     if Yt(i,1)==2
         Yt(i,1)=-1;
@@ -21,11 +17,12 @@ for i=1:699
     end        
 end
 
-%train
+%training
 for k=1:size(iterations,2)
  Wt=zeros(1,9);
 for i=1:iterations(1,k)
      lTrainCorrect=0;
+     
 
 for j=1:466
     Xt=X(j,:);
@@ -83,4 +80,6 @@ for i=1:size(iterations,2)
     disp( strcat('The testing accuracy for no. of iterations = ', num2str(iterations(1,i))));
     disp(testAccMatrix(1,i));
 end
+
+
 
